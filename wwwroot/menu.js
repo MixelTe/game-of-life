@@ -287,6 +287,10 @@ function buttons(btn, prm)
                 const rect = prm.getBoundingClientRect();
                 rect.x += window.pageXOffset;
                 rect.y += window.pageYOffset;
+                const h = parseInt(cellsColors[1].slice(cellsColors[1].indexOf("(") + 1, cellsColors[1].indexOf(",")));
+                const s = parseInt(cellsColors[1].slice(cellsColors[1].indexOf(",") + 1, cellsColors[1].indexOf("%")));
+                const l = parseInt(cellsColors[1].slice(cellsColors[1].lastIndexOf(",") + 1, cellsColors[1].lastIndexOf(")")-1));
+                colorPicker1.setColorHSL(h, s, l);
                 colorPicker1.openMenu(rect);
             }
             break;
@@ -297,6 +301,10 @@ function buttons(btn, prm)
                 const rect = prm.getBoundingClientRect();
                 rect.x += window.pageXOffset;
                 rect.y += window.pageYOffset;
+                const h = parseInt(cellsColors[0].slice(cellsColors[0].indexOf("(") + 1, cellsColors[0].indexOf(",")));
+                const s = parseInt(cellsColors[0].slice(cellsColors[0].indexOf(",") + 1, cellsColors[0].indexOf("%")));
+                const l = parseInt(cellsColors[0].slice(cellsColors[0].lastIndexOf(",") + 1, cellsColors[0].lastIndexOf(")")-1));
+                colorPicker2.setColorHSL(h, s, l);
                 colorPicker2.openMenu(rect);
             }
             break;

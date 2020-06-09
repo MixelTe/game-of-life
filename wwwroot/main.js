@@ -446,10 +446,10 @@ function randomNum(min, max)
 }
 
 
-canva.addEventListener("mousedown", (event) => { nowDrawing = true; if(event.which == 3) {rightClick = true} canvaMouseDraw(event, true); });
+canva.addEventListener("mousedown", (e) => { nowDrawing = true; if(e.which == 3) {rightClick = true} canvaMouseDraw(e, true); });
 document.addEventListener("mouseup", () => { nowDrawing = false; rightClick = false; splUp(); });
-canva.addEventListener("mousemove", (event) => canvaMouseDraw(event));
-canva.addEventListener("contextmenu", (event) => { event.preventDefault() })
+canva.addEventListener("mousemove", (e) => canvaMouseDraw(e));
+canva.addEventListener("contextmenu", (e) => { e.preventDefault() })
 let nowDrawing = false;
 let rightClick = false;
 function canvaMouseDraw(e, mousedown)
@@ -598,6 +598,7 @@ function fullScreenLogic()
     {
         canva.height = canvaHeight;
         canvaFullSreen = false;
+        splitter.style.top = canva.height + "px";
         elementPositions();
         onStart();
     }

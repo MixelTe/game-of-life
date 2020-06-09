@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Game of live</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../wwwroot/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../wwwroot/wwwroot/myStyle.css">
+    <script defer src="../wwwroot/wwwroot/scripts/colorPicker.js"></script>
+    <script defer src="../wwwroot/wwwroot/main.js"></script>
+    <script defer src="../wwwroot/wwwroot/menu.js"></script>
+</head>
+
+<body style="background-color: rgb(164, 211, 238); margin: 0px; user-select: none;">
+    <div style="text-align:center;">
+        <div id="canvaDIV" style="background-color: blue;">
+            <canvas id='canva' width="500" height="500" user-select: none;>Canva</canvas>
+            <div id="splitter"></div>
+        </div>
+        <div style="display: flex;">
+            <div class="left" id="LM">
+                <table style="margin-left: auto; margin-right: auto;" cellspacing="15px">
+                    <tr>
+                        <th></th>
+                        <th>World start position</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="LMI1" checked>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="ML1" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="LMI2">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="ML2" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="LMI3">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="ML3" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="LMI4">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="ML4" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="center">
+                <div style="display: flex; justify-content: space-between;" >
+                    <div onclick="document.location.href = 'https:/\/github.com/MixelTe/game-of-life';" style="width: 110px; height: 28px; background-color: rgb(0, 183, 255); font-size: 21px; cursor: pointer; border-radius: 0 0 6px 0;">Source code</div>
+                    <div id="buttonHint" style="width: 30px; height: 30px; background-color: springgreen; font-size: 30px; cursor: pointer; border-radius: 0 0 0 6px;">?</div>
+                </div>
+                <div>
+                    <div style="margin-right: 20px; display: inline-flex;">
+                        <div>Real time between days:</div>
+                        <div id="dayTime">stoped</div>
+                    </div>
+                    <div style="margin-right: 10px; display: inline-flex;">
+                        <div>Cells in world:</div>
+                        <div id="cellsCount">0</div>
+                    </div>
+                </div>
+                <div>
+                    <table style="margin-left: auto; margin-right: auto;" cellspacing="15px">
+                        <tr>
+                            <th>World</th>
+                            <th>Cells</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="margin-left: auto; margin-right: auto;">
+                                    <tr>
+                                        <td>
+                                            <button id="Wclear">Clear world</button>
+                                        </td>
+                                        <td>
+                                            <button id="Wrecreate">Recreate world</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <div style="display: inline-flex;">
+                                    <div>Scale:</div>
+                                    <input id="chscaleInput" type="range" min="1" max="40" style="width: 130px;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: inline-flex;">
+                                    <button id="fullScreenButton">Fullscreen</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="display: inline-flex;">
+                                    <div>Color:</div>
+                                    <div id="Color1" style="width: 100px; border: 1px solid black; margin-left: 10px;">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: inline-flex;">
+                                    <div>Color:</div>
+                                    <div id="Color2" style="width: 100px; border: 1px solid black; margin-left: 10px;">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="display: inline-flex;">
+                                    <div>Count of cells log:</div>
+                                    <input id="allCellsCount" type="text" class="input1" disabled value="press 'Space'"
+                                        style="width: 82px; user-select: all;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: inline-flex;">
+                                    <div>Time between days:</div>
+                                    <input id="speedInput" type="range" min="16" max="500" style="width: 120px;">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="display: inline-flex;">
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="right" id="RM">
+                <!-- <div>Create cells</div> -->
+                <table style="margin-left: auto; margin-right: auto;" cellspacing="15px">
+                    <tr>
+                        <th></th>
+                        <th>Create cells</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMI1" checked>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="MR1" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMI5">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div id="MR5" style="user-select: none;">Remove cells</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMI2">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="MR2" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMI3">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="MR3" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMI4">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <canvas id="MR4" width="125" height="125">Canva</canvas>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="hiden" style="background-color: rgb(240, 255, 240); width: 200px; display: block;" id="RMH1">
+                <div>Scale</div>
+                <table cellspacing="5px">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>width</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="1" max="64" class="RMH1R" id="RMH1I1" checked>
+                            </div>
+                        </td>
+                        <td style="width: 16px;">
+                            <div style="display: inline-flex;">
+                                <div id="RMH1O1">1</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>height</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="1" max="64" class="RMH1R" id="RMH1I2">
+                            </div>
+                        </td>
+                        <td style="width: 16px;">
+                            <div style="display: inline-flex;">
+                                <div id="RMH1O2">1</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <label for="RMH1I3">Equal</label>
+                                <input type="checkbox" id="RMH1I3" checked>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="hiden" style="background-color: rgb(240, 255, 240); width: 200px;" id="RMH5">
+                <div>Scale</div>
+                <table cellspacing="5px">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>width</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="1" max="64" class="RMH1R" id="RMH5I1" checked>
+                            </div>
+                        </td>
+                        <td style="width: 16px;">
+                            <div style="display: inline-flex;">
+                                <div id="RMH5O1">5</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>height</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="1" max="64" class="RMH1R" id="RMH5I2">
+                            </div>
+                        </td>
+                        <td style="width: 16px;">
+                            <div style="display: inline-flex;">
+                                <div id="RMH5O2">5</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <label for="RMH5I3">Equal</label>
+                                <input type="checkbox" id="RMH5I3" checked>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="hiden" style="background-color: rgb(240, 255, 240); width: 220px;" id="RMH2">
+                <div>direction</div>
+                <table cellspacing="5px">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMH2I1" checked>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <label for="RMH2I1">Right-down</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMH2I2">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <label for="RMH2I2">Left-down</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMH2I3">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <label for="RMH2I3">Right-up</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="radio" id="RMH2I4">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <label for="RMH2I4">Left-up</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="hiden" style="background-color: rgb(240, 255, 240); width: 205px;" id="RMH4">
+                <div>Scale</div>
+                <table cellspacing="5px">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>width</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="5" max="100" class="RMH1R" id="RMH4I1" checked>
+                            </div>
+                        </td>
+                        <td style="width: 24px;">
+                            <div style="display: inline-flex;">
+                                <div id="RMH4O1">5</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>height</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="5" max="100" class="RMH1R" id="RMH4I2">
+                            </div>
+                        </td>
+                        <td style="width: 24px;">
+                            <div style="display: inline-flex;">
+                                <div id="RMH4O2">5</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <label for="RMH4I3">Equal</label>
+                                <input type="checkbox" id="RMH4I3" checked>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="hiden" style="background-color: rgb(255, 240, 245); width: 235px;  display: block;" id="LMH1">
+                <table cellspacing="5px">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>spaces</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="3" max="7" step="0.5" class="LMH1R" id="LMH1I1" checked>
+                            </div>
+                        </td>
+                        <td style="width: 28px;">
+                            <div style="display: inline-flex;">
+                                <div id="LMH1O1">4</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>frequency</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="0" max="0.5" step="0.01" class="LMH1R" id="LMH1I2">
+                            </div>
+                        </td>
+                        <td style="width: 28px;">
+                            <div style="display: inline-flex;">
+                                <div id="LMH1O2">0.5</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="hiden" style="background-color: rgb(255, 240, 245); width: 178px;" id="LMH2">
+                <table cellspacing="5px">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <div>frequency</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: inline-flex;">
+                                <input type="range" min="0" max="0.5" step="0.01" class="LMH2R" id="LMH2I1">
+                            </div>
+                        </td>
+                        <td style="width: 28px;">
+                            <div style="display: inline-flex;">
+                                <div id="LMH2O1">0.5</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="hint" style="position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;  background-color: rgba(0, 0, 0, 0.5);">
+        <div style="position: absolute; left: calc(50% - 175px); top: calc(50% - 100px); width: 350px; height: 200px; display: table;">
+            <div style="display: table-cell; text-align: center; vertical-align: middle; background-color: honeydew;">
+                <div id="closeHint" style="position: absolute; top: 0px; right: 0px; width: 30px; height: 30px; background-color: salmon; font-size: 30px; cursor: pointer;">
+                    <div style="transform: translateY(0px);">X</div>
+                </div>
+                <table cellspacing="15px" style="display: inline-table;">
+                    <tbody>
+                        <tr>
+                            <th>Button</th>
+                            <th>Control</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">
+                                <div style="display: inline-flex; text-align: right;">
+                                    <div>Space</div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;">
+                                <div style="display: inline-flex;">
+                                    <div>Stop time</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">
+                                <div style="display: inline-flex;">
+                                    <div>Left mouse button</div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;">
+                                <div style="display: inline-flex;">
+                                    <div>add cells</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">
+                                <div style="display: inline-flex;">
+                                    <div>Right mouse button</div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;">
+                                <div style="display: inline-flex;">
+                                    <div>remove cells</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 10px;">You can change height of world if drag from below</div>
+            </div>
+        </div>
+    </div>
+</body>

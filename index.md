@@ -2,7 +2,7 @@
 
 <head>
     <title>Game of live</title>
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <link rel="stylesheet" type="text/css" href="myStyle.css">
     <script defer src="wwwroot/scripts/colorPicker.js"></script>
     <script defer src="wwwroot/main.js"></script>
     <script defer src="wwwroot/menu.js"></script>

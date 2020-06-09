@@ -66,9 +66,9 @@
             cursor: n-resize;
         }
     </style>
-    <script defer src="scripts/colorPicker.js"></script>
-    <script defer src="main.js"></script>
-    <script defer src="menu.js"></script>
+    <script defer src="wwwroot/scripts/colorPicker.js"></script>
+    <script defer src="wwwroot/main.js"></script>
+    <script defer src="wwwroot/menu.js"></script>
 </head>
 
 <body style="background-color: rgb(164, 211, 238); margin: 0px; user-select: none;">

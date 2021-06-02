@@ -143,11 +143,6 @@ function onStart(toFull)
     }
 
     drawCells();
-
-    if (window.innerWidth < 1100)
-    {
-        alert("browser window is less then recomended")
-    }
 }
 
 function main(time)
